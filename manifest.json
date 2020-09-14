@@ -1,0 +1,32 @@
+{
+  "manifest_version": 2,
+  "name": "Mashenka work chrome plugin",
+  "version": "0.2.0",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mynew.all.biz/goods_services_management/add/goods"
+      ],
+      "js": [
+        "app/contents/inject.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "declarativeContent"
+  ],
+  "web_accessible_resources": [
+    "app/resources/**/*.js"
+  ],
+  "background": {
+    "scripts": [
+      "app/backgrounds/main.js"
+    ]
+  },
+  "page_action": {
+    "default_title": "Mashenka work chrome plugin",
+    "default_icon": "icons/mashenka.png",
+    "default_popup": "app/resources/allbiz/views/popup.html"
+  }
+}
