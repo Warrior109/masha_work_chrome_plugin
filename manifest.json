@@ -1,7 +1,13 @@
 {
   "manifest_version": 2,
-  "name": "Mashenka work chrome plugin",
+  "name": "Робочий плагін для Машеньки",
   "version": "0.2.0",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkJ5yP5baksgheY2scITqhBntbya0SL2S7Q2ZHrzlJhsjSltSo1wdbi8ftUkkCWKtbgHdGjRWupAwYaubIvUS8stVrJBRPRILZq17AR+ciBmZ5ZYAxsYdWixsNpdokFUBb9HyiOmUcGOXocxg3RvXfQXLeqSWfFCYTQs5kEaLFQXrk+igTe3Q+82dp0+ABUPo7a7dWQ6R/5LeMZuHcFXBp7RajSjuXmFR0/N7ABxESCz4l8dUsCYKFgEoziEUbshgzZ2nK6nnisd0xlkFLd8dBixLgXlFe3CLibPJ2QLP33sY82mu1oR2gWp9BcpmBLXf2MiuchgxfH5cYdUJVN8C1wIDAQAB",
+  "icons": {
+    "16": "icons/mashenka.png",
+    "48": "icons/mashenka.png",
+    "128": "icons/mashenka.png"
+  },
   "content_scripts": [
     {
       "matches": [
@@ -14,19 +20,26 @@
   ],
   "permissions": [
     "activeTab",
-    "declarativeContent"
+    "declarativeContent",
+    "identity"
   ],
   "web_accessible_resources": [
-    "app/resources/**/*.js"
+    "app/injects/*.js",
+    "app/services/*.js",
+    "app/services/**/*.js"
   ],
   "background": {
-    "scripts": [
-      "app/backgrounds/main.js"
-    ]
+    "page": "app/backgrounds/main.html",
+    "persistent": false
   },
   "page_action": {
-    "default_title": "Mashenka work chrome plugin",
+    "default_title": "Робочий плагін для Машеньки",
     "default_icon": "icons/mashenka.png",
-    "default_popup": "app/resources/allbiz/views/popup.html"
-  }
+    "default_popup": "app/views/popup/allbiz/popup.html"
+  },
+  "oauth2": {
+    "client_id": "989440262522-b8uuufchov8tgb064f1u0dncfl3r2kom.apps.googleusercontent.com",
+    "scopes": ["https://www.googleapis.com/auth/spreadsheets"]
+  },
+  "content_security_policy": "script-src 'self' https://apis.google.com/; object-src 'self'"
 }

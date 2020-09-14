@@ -13,11 +13,11 @@ function injectScript(file_path, tag) {
     script.setAttribute('id', "mashenka-chrome-extension");
     node.appendChild(script);
 }
-injectScript(chrome.extension.getURL('app/resources/allbiz/main.js'), 'head');
+injectScript(chrome.extension.getURL('app/injects/allbiz.js'), 'head');
 
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.message === "translate_all_languages") {
+  if (request.type === 'translate_all_languages') {
     window.postMessage({type: 'TRANSLATE_ON_ALL_LANGUAGES'});
   }
 });
