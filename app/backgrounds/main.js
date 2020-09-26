@@ -19,7 +19,7 @@ chrome.runtime.onInstalled.addListener(function() {
 window.addEventListener('load', GApiClient.init);
 
 chrome.extension.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.type === 'fill_by_template') {
+  if (request.type === 'loadTasksSheet') {
     GApiClient.loadTasksSheet((values) => {
       sendResponse(values)
     });
