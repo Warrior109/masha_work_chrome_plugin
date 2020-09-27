@@ -2,12 +2,6 @@ import BasePage from './basePage.js'
 
 // Incapsulates logic of the main page
 class MainPage extends BasePage {
-  render = callback => {
-    let $content = $(this._html)
-    this._bindEvents($content)
-    callback($content)
-  }
-
   _bindEvents = $content => {
     $content.find('#fill-by-template').on('click', () => pagesManager.open('tasks'))
 
@@ -21,7 +15,7 @@ class MainPage extends BasePage {
     })
   }
 
-  _html = `
+  _html = () => `
     <div class="row main-page">
       <nav class="nav flex-column">
         <a class="nav-link" id="fill-by-template" href="#">Заповнити по шаблону</a>

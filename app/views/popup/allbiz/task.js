@@ -20,7 +20,15 @@ class Task {
     this.forDate = moment(date, 'DD.MM')
   }
 
-  render = () => $(this._html())
+  render = () => {
+    let $content = $(this._html())
+    this._bindEvents($content)
+    return $content
+  }
+
+  _bindEvents = $content => {
+    $content.on('click', () => pagesManager.open('taskConfiguration', this))
+  }
 
   _html = () => `
     <tr>

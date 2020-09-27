@@ -1,10 +1,4 @@
-import MainPage from './mainPage.js'
-import TasksPage from './tasksPage.js'
-
-const PAGES = {
-  main: MainPage,
-  tasks: TasksPage
-}
+import { PAGES } from './constants.js'
 
 // Is responsible for which page is active now
 class PagesManager {
@@ -16,8 +10,7 @@ class PagesManager {
     this.open('main')
   }
 
-  open = (pageName) => {
-    console.log('open', pageName)
+  open = (pageName, ...args) => {
     if (this.activePage) this.activePage.close()
     this.container.empty()
     this.container.append(this.loader)
@@ -26,7 +19,7 @@ class PagesManager {
     this.activePage.open($content => {
       this.container.append($content)
       this.loader.remove()
-    })
+    }, ...args)
   }
 }
 

@@ -21,7 +21,8 @@
   "permissions": [
     "activeTab",
     "declarativeContent",
-    "identity"
+    "identity",
+    "storage"
   ],
   "web_accessible_resources": [
     "app/injects/*.js",

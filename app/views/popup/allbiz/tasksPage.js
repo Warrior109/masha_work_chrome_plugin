@@ -2,7 +2,7 @@ import BasePage from './basePage.js'
 import Task from './task.js'
 
 // Incapsulate logic to work with tasks page
-class TasksPage extends BasePage{
+class TasksPage extends BasePage {
   static open(callback) {
     chrome.runtime.sendMessage({type: 'loadTasksSheet'}, (items) => {
       let today = moment()
@@ -19,23 +19,19 @@ class TasksPage extends BasePage{
     this.tasks = tasks
   }
 
-  render = (callback) => {
-    let $content = $(this._html)
+  _modifyContent = $content => {
     let $tasks = this.tasks.map(task => task.render())
     $content.find('tbody').append($tasks)
-    this._bindEvents($content)
-
-    callback($content)
   }
 
   _bindEvents = $content => {
     $content.find('#back-to-menu').on('click', () => pagesManager.open('main'))
   }
 
-  _html = `
-    <div class='row tasks-page table-hover'>
+  _html = () => `
+    <div class='row tasks-page'>
       <a href='#' id='back-to-menu' class='btn btn-dark'>Назад</a>
-      <table class='table'>
+      <table class='table table-hover'>
         <thead class='thead-dark'>
           <tr>
             <th scope="col">Назва товару</th>
