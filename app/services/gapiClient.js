@@ -3,7 +3,8 @@ const API_KEY = 'AIzaSyANqDimeqNp5ELZ1aZIsR408evRyVeC9Tk';
 const DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
 
 const SPREADSHEET_ID = '1EZd50c9KyUiPZCh3ty6ZYh7Hf_eMpBF3jCBxJ-15VLg';
-const SPREADSHEET_TAB_NAME = 'вересень';
+const SPREADSHEET_NAMES = ['січень', 'лютий', 'березень', 'квітень', 'травень', 'червень', 'липень',
+                           'серпень', 'вересень', 'жовтень', 'листопад', 'лютий'];
 
 let GApiClient = {
   init: () => {
@@ -21,17 +22,19 @@ let GApiClient = {
   },
 
   loadTasksSheet: function (afterLoadCallback) {
+    let spreadsheetName = SPREADSHEET_NAMES[new Date().getMonth()]
+
     // Get token
     chrome.identity.getAuthToken({interactive: true}, (token) => {
       // Set token in GAPI library
       gapi.auth.setToken({
         'access_token': token,
-      });
+      })
 
       // Append values
       gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: SPREADSHEET_ID,
-        range: SPREADSHEET_TAB_NAME
+        range: spreadsheetName
       }).then((response) => {
         afterLoadCallback(response.result.values);
       });

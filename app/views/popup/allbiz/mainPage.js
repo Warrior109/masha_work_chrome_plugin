@@ -11,7 +11,7 @@ class MainPage extends BasePage {
   _sendTranslateLanguagesEvent = () => {
     chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
       let activeTab = tabs[0]
-      chrome.tabs.sendMessage(activeTab.id, {type: 'translate_all_languages'})
+      chrome.tabs.sendMessage(activeTab.id, {type: 'translateAllLanguages'})
     })
   }
 

@@ -27,7 +27,8 @@
   "web_accessible_resources": [
     "app/injects/*.js",
     "app/services/*.js",
-    "app/services/**/*.js"
+    "app/services/**/*.js",
+    "app/services/**/**/*.js"
   ],
   "background": {
     "page": "app/backgrounds/main.html",

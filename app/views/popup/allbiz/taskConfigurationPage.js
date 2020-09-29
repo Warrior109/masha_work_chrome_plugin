@@ -25,6 +25,19 @@ class TaskConfigurationPage extends BasePage {
 
   _bindEvents = $content => {
     $content.find('#back-to-tasks').on('click', () => pagesManager.open('tasks'))
+    $content.find('.select').on('change.select2', this._changeTaskTxtTemplate)
+    $content.find('#submit-config').on('click', this._sendFillFormEvent)
+  }
+
+  _changeTaskTxtTemplate = event => this.task.changeTxtTemplate($(event.target).val())
+  _sendFillFormEvent = () => {
+    this.task.load(task => {
+      chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+        let activeTab = tabs[0]
+        console.log('tasl loaded', task, 'send fillForm message')
+        chrome.tabs.sendMessage(activeTab.id, {type: 'fillForm', task: task})
+      })
+    })
   }
 
   _html = () => `
@@ -38,7 +51,7 @@ class TaskConfigurationPage extends BasePage {
         <div class='col-sm-4'><strong>Портал:</strong></div>
         <div class='col-sm-8'>${this.task.portal}</div>
       </div>
-      <h6>Налаштування шаблону</h6>
+      <h4>Налаштування шаблону</h4>
       <div class='row select-block'>
         <div class='col-sm-4'>
           <strong>Шаблон, що буде використовуватися:</strong>
@@ -49,6 +62,7 @@ class TaskConfigurationPage extends BasePage {
           </select>
         </div>
       </div>
+      <div><a href='#' id='submit-config' class='btn btn-dark'>Заповнити!</a></div>
     </div>
   `
 }

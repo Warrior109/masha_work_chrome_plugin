@@ -17,7 +17,9 @@ injectScript(chrome.extension.getURL('app/injects/allbiz.js'), 'head');
 
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.type === 'translate_all_languages') {
+  if (request.type === 'translateAllLanguages') {
     window.postMessage({type: 'TRANSLATE_ON_ALL_LANGUAGES'});
+  } else if (request.type === 'fillForm') {
+    window.postMessage({type: 'FILL_FORM', task: request.task});
   }
 });
