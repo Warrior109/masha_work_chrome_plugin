@@ -34,7 +34,6 @@ class TaskConfigurationPage extends BasePage {
     this.task.load(task => {
       chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
         let activeTab = tabs[0]
-        console.log('tasl loaded', task, 'send fillForm message')
         chrome.tabs.sendMessage(activeTab.id, {type: 'fillForm', task: task})
       })
     })
