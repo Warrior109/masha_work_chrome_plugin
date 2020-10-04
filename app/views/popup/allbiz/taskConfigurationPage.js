@@ -49,6 +49,8 @@ class TaskConfigurationPage extends BasePage {
         <div class='col-sm-8'>${this.task.type}</div>
         <div class='col-sm-4'><strong>Портал:</strong></div>
         <div class='col-sm-8'>${this.task.portal}</div>
+        <div class='col-sm-4'><strong>Додаткова інформація:</strong></div>
+        <div class='col-sm-8'>${this.task.additionalInformation || ''}</div>
       </div>
       <h4>Налаштування шаблону</h4>
       <div class='row select-block'>

@@ -11,7 +11,9 @@ class GroupWrapper extends DescriptionObject {
   static wrapObjects = objects => {
     let results = [], currentWrapper
     objects.forEach(object => {
-      if (currentWrapper && currentWrapper.tag == object.groupWrapper) {
+      if (object.isNested) {
+        results[results.length - 1].addNested(object, this)
+      } else if (currentWrapper && currentWrapper.tag == object.groupWrapper) {
         currentWrapper.addItem(object)
       } else {
         currentWrapper = object.groupWrapper ? new this(object) : null
@@ -28,6 +30,10 @@ class GroupWrapper extends DescriptionObject {
     super(null)
     this.tag = object.groupWrapper
     this.addItem(object)
+  }
+
+  addNested = (object, GroupWrapper) => {
+    this.items[this.items.length - 1].addNested(object, GroupWrapper)
   }
 
   line = () => this.items.map(item => item.transform()).join('')

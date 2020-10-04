@@ -19,13 +19,15 @@ class Task {
 
   type = null
   portal = null
+  additionalInformation = null
   forDate = null
   txtTemplate = null
 
   constructor(item, date) {
     this.name = item[1]
     this.type = item[2]
-    this.portal = item[4]
+    this.portal = item[3]
+    this.additionalInformation = item[4]
     this.forDate = moment(date, 'DD.MM')
   }
 
@@ -65,6 +67,7 @@ class Task {
       <td>${this.name}</td>
       <td>${this.type}</td>
       <td>${this.portal}</td>
+      <td>${this.additionalInformation || ''}</td>
     </tr>
   `
 }

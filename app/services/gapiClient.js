@@ -2,7 +2,10 @@
 const API_KEY = 'AIzaSyANqDimeqNp5ELZ1aZIsR408evRyVeC9Tk';
 const DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
 
-const SPREADSHEET_ID = '1EZd50c9KyUiPZCh3ty6ZYh7Hf_eMpBF3jCBxJ-15VLg';
+// REAL
+// const SPREADSHEET_ID = '1fZ24GlBgYEA76ik_Tf8yN1Nyp0u6L2EHMZC-GreqGJM';
+// TEST
+const SPREADSHEET_ID = '1MCpVJILNNNWNO4rVa2OSxk_IJfL5wk-IazRvhXBWOOU';
 const SPREADSHEET_NAMES = ['січень', 'лютий', 'березень', 'квітень', 'травень', 'червень', 'липень',
                            'серпень', 'вересень', 'жовтень', 'листопад', 'лютий'];
 

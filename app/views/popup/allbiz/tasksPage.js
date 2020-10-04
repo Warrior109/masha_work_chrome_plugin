@@ -37,6 +37,7 @@ class TasksPage extends BasePage {
             <th scope="col">Назва товару</th>
             <th scope="col">Тип</th>
             <th scope="col">Портал</th>
+            <th scope="col">Додаткова інформація</th>
           </tr>
         </thead>
         <tbody></tbody>

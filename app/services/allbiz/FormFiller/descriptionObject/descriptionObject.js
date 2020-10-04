@@ -8,6 +8,8 @@ class DescriptionObject {
 
   groupWrapper = null
   isDeletePatternMatch = false
+  isNested = false
+  nestedItem = null
   line = null
 
   constructor(line) {
@@ -17,8 +19,18 @@ class DescriptionObject {
   transform = () => {
     let line = typeof this.line === 'function' ? this.line() : this.line
     line = line.replace(new RegExp(this.constructor.pattern()), this.styles())
+    if (this.nestedItem) line = line + this.nestedItem.transform()
     line = this._wrapObject(line)
     return line
+  }
+
+  // FIXME: Yes, it's a ugly, but I could not to find a better way
+  addNested = (object, GroupWrapper) => {
+    if (this.nestedItem) {
+      this.nestedItem.addItem(object)
+    } else {
+      this.nestedItem = new GroupWrapper(object)
+    }
   }
 
   styles = (config = this.constructor.STYLES) => {

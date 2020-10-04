@@ -4,7 +4,7 @@ import DescriptionObject from './descriptionObject.js'
 class PropertyLine extends DescriptionObject {
   static NAMES = [
     'Форма выпуска', 'Вид', 'Вкус', 'Объем', 'Количество в упаковке', 'Назначение', 'Стать',
-    'Возраст'
+    'Возраст', 'Пол', 'Время применения', 'Основа'
   ]
   static STYLES = {
     container: 'p',
