@@ -1,13 +1,13 @@
 // Just a base class for line of text, which is separated from others lines with a new line symbol
 class DescriptionObject {
-  static isGroupObject = false
-
   static isIt(line) { return line.match(new RegExp(this.pattern())) }
 
   // Should be reloaded in the children
   // Just string, which will be converted into regexp
   static pattern() {}
 
+  groupWrapper = null
+  isDeletePatternMatch = false
   line = null
 
   constructor(line) {
@@ -15,13 +15,14 @@ class DescriptionObject {
   }
 
   transform = () => {
-    let line = this.line.replace(new RegExp(this.constructor.pattern()), this.styles())
+    let line = typeof this.line === 'function' ? this.line() : this.line
+    line = line.replace(new RegExp(this.constructor.pattern()), this.styles())
     line = this._wrapObject(line)
     return line
   }
 
-  styles = () => {
-    let styles = [], config = this.constructor.STYLES
+  styles = (config = this.constructor.STYLES) => {
+    let styles = []
     for (let key in config) {
       // container - should parse in the "_wrapObject" method
       if (key === 'container') { continue }
@@ -33,11 +34,12 @@ class DescriptionObject {
 
   _wrapObject = line => {
     let containerStyle = this._containerStyle(this.constructor.STYLES.container)
-    return line.replace(/^.*$/, this._joinStyles([containerStyle]))
+    return line.replace(/^.*$/, this._joinStyles([containerStyle], false))
   }
 
-  _joinStyles = (tags) => {
-    let result = '$&'
+  // FIXME: yeah, needs a refactoring
+  _joinStyles = (tags, isDeletePatternMatch = this.isDeletePatternMatch) => {
+    let result = isDeletePatternMatch ? '' : '$&'
     tags.forEach(tag => result = `${tag.open}${result}${tag.close}`)
     return result
   }

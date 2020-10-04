@@ -1,11 +1,13 @@
 import PropertyLine from './descriptionObject/propertyLine.js'
 import Chapter from './descriptionObject/chapter.js'
+import List from './descriptionObject/list.js'
 import Plain from './descriptionObject/plain.js'
+import GroupWrapper from './descriptionObject/groupWrapper.js'
 
 // Fill title description from the template.
 class DescriptionFiller {
   // Order is important
-  static TYPES = [PropertyLine, Chapter, Plain]
+  static TYPES = [PropertyLine, Chapter, List, Plain]
 
   task = null
   editor = null
@@ -23,12 +25,15 @@ class DescriptionFiller {
   // Takes a description in the txt format, and convert it to HTML description, which parsed by
   // tinyMCE editor
   _generateContent = () => {
-    return this.task.description.split("\n").map(this._formatLine).join('')
+    let objects = this.task.description.split("\n").map(this._wrapLine)
+    objects = GroupWrapper.wrapObjects(objects)
+
+    return objects.map(object => object.transform()).join('')
   }
 
-  _formatLine = line => {
+  _wrapLine = line => {
     let Type = this.constructor.TYPES.find(type => type.isIt(line))
-    return new Type(line).transform()
+    return new Type(line)
   }
 }
 
