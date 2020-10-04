@@ -2,7 +2,10 @@ import DescriptionObject from './descriptionObject.js'
 
 // Line, which start with one from a property names, which ends with a ":" character
 class PropertyLine extends DescriptionObject {
-  static NAMES = ['Форма выпуска', 'Вид', 'Вкус', 'Объем', 'Количество в упаковке']
+  static NAMES = [
+    'Форма выпуска', 'Вид', 'Вкус', 'Объем', 'Количество в упаковке', 'Назначение', 'Стать',
+    'Возраст'
+  ]
   static STYLES = {
     container: 'p',
     bold: true

@@ -1,13 +1,14 @@
 import PropertyLine from './descriptionObject/propertyLine.js'
 import Chapter from './descriptionObject/chapter.js'
 import List from './descriptionObject/list.js'
+import NumberedList from './descriptionObject/numberedList.js'
 import Plain from './descriptionObject/plain.js'
 import GroupWrapper from './descriptionObject/groupWrapper.js'
 
 // Fill title description from the template.
 class DescriptionFiller {
   // Order is important
-  static TYPES = [PropertyLine, Chapter, List, Plain]
+  static TYPES = [PropertyLine, Chapter, List, NumberedList, Plain]
 
   task = null
   editor = null
