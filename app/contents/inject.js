@@ -13,12 +13,12 @@ const SCRIPTS_BY_HOST = {
  * @see    {@link http://stackoverflow.com/questions/20499994/access-window-variable-from-content-script}
  */
 function injectScript(file_path, tag) {
-    var node = document.getElementsByTagName(tag)[0];
-    var script = document.createElement('script');
-    script.setAttribute('type', 'module');
-    script.setAttribute('src', file_path);
-    script.setAttribute('id', "mashenka-chrome-extension");
-    node.appendChild(script);
+  var node = document.getElementsByTagName(tag)[0];
+  var script = document.createElement('script');
+  script.setAttribute('type', 'module');
+  script.setAttribute('src', file_path);
+  script.setAttribute('id', "mashenka-chrome-extension");
+  node.appendChild(script);
 }
 injectScript(chrome.extension.getURL(`app/injects/${SCRIPTS_BY_HOST[location.host]}.js`), 'head');
 
