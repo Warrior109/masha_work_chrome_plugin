@@ -6,8 +6,29 @@ class Task {
     let taskDate
     return items.map(item => {
       taskDate = item[0] || taskDate
-      return new Task(item, taskDate)
+
+      return new Task({
+        date: taskDate,
+        name: item[1],
+        type: item[2],
+        portal: item[3],
+        additionalInformation: item[4]
+      })
     })
+  }
+
+  static wrap(items) {
+    return items.map(item => new Task(item))
+  }
+
+  static serialize(tasks) {
+    return tasks.map(task => ({
+      name: task.name,
+      type: task.type,
+      portal: task.portal,
+      additionalInformation: task.additionalInformation,
+      date: task.date
+    }))
   }
 
   // Name always contains english and russian versions
@@ -23,12 +44,13 @@ class Task {
   forDate = null
   txtTemplate = null
 
-  constructor(item, date) {
-    this.name = item[1]
-    this.type = item[2]
-    this.portal = item[3]
-    this.additionalInformation = item[4]
-    this.forDate = moment(date, 'DD.MM')
+  constructor(data) {
+    this.name = data.name
+    this.type = data.type
+    this.portal = data.portal
+    this.additionalInformation = data.additionalInformation
+    this.data = data.date
+    this.forDate = moment(data.date, 'DD.MM')
   }
 
   changeTxtTemplate = txtTemplateId => this.txtTemplate = TxtTemplate.fromId(txtTemplateId)
@@ -51,8 +73,10 @@ class Task {
   // Name always has en and ru versions. This method find each version and sets them to relative
   // variables
   _parseName = () => {
-    this.nameEn = this.name.match(/[a-z0-9]+[a-z0-9 +\-_]*[a-z0-9]/i)[0]
-    this.nameRu = this.name.match(/[а-я0-9]+[а-я0-9 +\-_]*[а-я0-9]/i)[0]
+    let nameEnMatch = this.name.match(/[a-z0-9]+[a-z0-9 +\-_]*[a-z0-9]/i)
+    let nameRuMatch = this.name.match(/[а-я0-9]+[а-я0-9 +\-_]*[а-я0-9]/i)
+    this.nameEn = nameEnMatch && nameEnMatch[0]
+    this.nameRu = nameRuMatch && nameRuMatch[0]
   }
 
   // Fill txt template by current task
