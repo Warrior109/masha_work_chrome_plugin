@@ -1,3 +1,10 @@
+const SCRIPTS_BY_HOST = {
+  'mynew.all.biz': 'allbiz',
+  'zakupka.com': 'zakupka',
+  'tomas.kz': 'zakupka',
+  'satom.ru': 'zakupka',
+}
+
 /**
  * injectScript - Inject internal script to available access to the `window`
  *
@@ -13,8 +20,7 @@ function injectScript(file_path, tag) {
     script.setAttribute('id', "mashenka-chrome-extension");
     node.appendChild(script);
 }
-injectScript(chrome.extension.getURL('app/injects/allbiz.js'), 'head');
-
+injectScript(chrome.extension.getURL(`app/injects/${SCRIPTS_BY_HOST[location.host]}.js`), 'head');
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === 'translateAllLanguages') {

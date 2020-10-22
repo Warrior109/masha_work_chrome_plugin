@@ -9,6 +9,24 @@ chrome.runtime.onInstalled.addListener(function() {
             hostEquals: 'mynew.all.biz',
             pathContains: 'goods_services_management/add/goods'
           },
+        }),
+        new chrome.declarativeContent.PageStateMatcher({
+          pageUrl: {
+            hostEquals: 'zakupka.com',
+            pathContains: 'cabinet/tovary-foto/new'
+          },
+        }),
+        new chrome.declarativeContent.PageStateMatcher({
+          pageUrl: {
+            hostEquals: 'tomas.kz',
+            pathContains: 'cabinet/tovary-foto/new'
+          },
+        }),
+        new chrome.declarativeContent.PageStateMatcher({
+          pageUrl: {
+            hostEquals: 'satom.ru',
+            pathContains: 'cabinet/tovary-foto/new'
+          },
         })
       ],
       actions: [new chrome.declarativeContent.ShowPageAction()]

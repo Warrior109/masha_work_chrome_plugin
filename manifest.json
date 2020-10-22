@@ -11,7 +11,10 @@
   "content_scripts": [
     {
       "matches": [
-        "https://mynew.all.biz/goods_services_management/add/goods"
+        "https://mynew.all.biz/goods_services_management/add/goods",
+        "https://zakupka.com/cabinet/tovary-foto/new",
+        "https://tomas.kz/cabinet/tovary-foto/new",
+        "https://satom.ru/cabinet/tovary-foto/new"
       ],
       "js": [
         "app/contents/inject.js"

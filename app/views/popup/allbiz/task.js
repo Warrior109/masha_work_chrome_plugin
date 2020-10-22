@@ -56,7 +56,7 @@ class Task {
   }
 
   // Fill txt template by current task
-  _fillTemplate = text => text.replace(/Название\*/gi, this.nameEn)
+  _fillTemplate = text => text.replace(/Название\*/gi, this.nameEn || this.nameRu)
 
   _bindEvents = $content => {
     $content.on('click', () => pagesManager.open('taskConfiguration', this))

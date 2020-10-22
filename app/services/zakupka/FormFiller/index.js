@@ -6,8 +6,6 @@ import PropertiesFiller from './propertiesFiller.js'
 class FormFiller {
   task = null
   titleFiller = null
-  descriptionFiller = null
-  propertiesFiller = null
 
   constructor(task) {
     this.task = task
